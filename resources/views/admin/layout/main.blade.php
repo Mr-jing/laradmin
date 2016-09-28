@@ -28,23 +28,17 @@
     <![endif]-->
 </head>
 <body class="hold-transition skin-green sidebar-mini">
-
 <div class="wrapper">
-@include('admin.layout.header')
+    @include('admin.layout.header')
 
-<!-- Left side column. contains the logo and sidebar -->
-@include('admin.layout.sidebar')
+    @include('admin.layout.sidebar')
 
-<!-- Content Wrapper. Contains page content -->
-@yield('content')
-<!-- /.content-wrapper -->
+    @yield('content')
 
-@include('admin.layout.footer')
+    @include('admin.layout.footer')
 
-<!-- Control Sidebar -->
     @include('admin.layout.control-sidebar')
 </div>
-<!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
