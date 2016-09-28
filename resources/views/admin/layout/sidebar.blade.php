@@ -32,9 +32,9 @@
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="menus"><i class="fa fa-circle-o"></i>菜单管理</a></li>
-                    <li><a href="routes"><i class="fa fa-circle-o"></i>访问控制</a></li>
-                    <li><a href="roles"><i class="fa fa-circle-o"></i>角色管理</a></li>
+                    <li><a href="{{url('admin/menus')}}"><i class="fa fa-circle-o"></i>菜单管理</a></li>
+                    <li><a href="{{url('admin/routes')}}"><i class="fa fa-circle-o"></i>访问控制</a></li>
+                    <li><a href="{{url('admin/roles')}}"><i class="fa fa-circle-o"></i>角色管理</a></li>
                 </ul>
             </li>
             <li class="treeview">
