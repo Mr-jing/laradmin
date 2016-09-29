@@ -15,8 +15,7 @@ class CreateMenusRelatedTables extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('uri');
-            $table->string('params');
+            $table->string('url');
             $table->integer('parent_id')->unsigned();
             $table->integer('sort');
             $table->boolean('status');

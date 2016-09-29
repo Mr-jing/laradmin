@@ -25,7 +25,7 @@ class CreateMenuRequest extends Request
     {
         return [
             'menu_parent_id' => 'required|integer',
-            'menu_name' => 'required|string|between:1,3',
+            'menu_name' => 'required|string|between:1,15',
             'menu_url' => 'string|between:0,255',
             'menu_sort' => 'integer',
         ];
