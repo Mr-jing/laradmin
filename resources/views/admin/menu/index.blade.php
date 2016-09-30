@@ -81,7 +81,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending"
-                                                    style="width: 100px;">操作
+                                                    style="width:145px;">操作
                                                 </th>
                                             </tr>
                                             </thead>
@@ -93,7 +93,22 @@
                                                     <td>{{$menu['url']}}</td>
                                                     <td>{{$menu['sort']}}</td>
                                                     <td>{{$menu['status']}}</td>
-                                                    <td>-</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a title="查看" role="button"
+                                                               class="btn btn-default btn-flat">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a title="编辑" role="button"
+                                                               class="btn btn-default btn-flat">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                            <a title="删除" role="button"
+                                                               class="btn btn-default btn-flat">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
