@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/', ['uses' => 'AdminController@index']);
 
     // 菜单显示
-    Route::resource('menus', 'MenuController', ['except' => ['show']]);
+    Route::resource('menus', 'MenuController');
 
     // 访问权限
     Route::resource('routes', 'RouteController', ['except' => ['show']]);

@@ -51,6 +51,9 @@ class MenuController extends Controller
 
     public function show($id)
     {
+        $menu = Menu::findOrFail($id);
+
+        var_dump($menu->roles()->get());
     }
 
     public function setting(Request $request, $id)
