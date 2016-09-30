@@ -95,9 +95,9 @@
                                                     <td>{{$menu['status']}}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a title="查看" role="button"
+                                                            <a title="设置" role="button"
                                                                class="btn btn-default btn-flat">
-                                                                <i class="fa fa-eye"></i>
+                                                                <i class="fa fa-gear "></i>
                                                             </a>
                                                             <a title="编辑" role="button"
                                                                class="btn btn-default btn-flat">
