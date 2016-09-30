@@ -22,7 +22,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Data Table With Full Features</h3>
+                            <h3 class="box-title">菜单列表</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -62,112 +62,41 @@
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 163px;">Rendering engine
+                                                    style="width: 163px;">名称
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                    style="width: 203px;">Browser
+                                                    style="width: 203px;">URL
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Platform(s): activate to sort column ascending"
-                                                    style="width: 179px;">Platform(s)
+                                                    style="width: 179px;">排序
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Engine version: activate to sort column ascending"
-                                                    style="width: 139px;">Engine version
+                                                    style="width: 139px;">状态
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending"
-                                                    style="width: 100px;">CSS grade
+                                                    style="width: 100px;">操作
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Firefox 1.0</td>
-                                                <td>Win 98+ / OSX.2+</td>
-                                                <td>1.7</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Firefox 1.5</td>
-                                                <td>Win 98+ / OSX.2+</td>
-                                                <td>1.8</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Firefox 2.0</td>
-                                                <td>Win 98+ / OSX.2+</td>
-                                                <td>1.8</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Firefox 3.0</td>
-                                                <td>Win 2k+ / OSX.3+</td>
-                                                <td>1.9</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Camino 1.0</td>
-                                                <td>OSX.2+</td>
-                                                <td>1.8</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Camino 1.5</td>
-                                                <td>OSX.3+</td>
-                                                <td>1.8</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Netscape 7.2</td>
-                                                <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                                <td>1.7</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Netscape Browser 8</td>
-                                                <td>Win 98SE+</td>
-                                                <td>1.7</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="odd">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Netscape Navigator 9</td>
-                                                <td>Win 98+ / OSX.2+</td>
-                                                <td>1.8</td>
-                                                <td>A</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1">Gecko</td>
-                                                <td>Mozilla 1.0</td>
-                                                <td>Win 95+ / OSX.1+</td>
-                                                <td>1</td>
-                                                <td>A</td>
-                                            </tr>
+                                            @foreach($menus as $key => $menu)
+                                                <tr role="row" class="odd">
+                                                    <td>{{$menu['prefix']}}{{$menu['name']}}</td>
+                                                    <td>{{$menu['url']}}</td>
+                                                    <td>{{$menu['sort']}}</td>
+                                                    <td>{{$menu['status']}}</td>
+                                                    <td>-</td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th rowspan="1" colspan="1">Rendering engine</th>
-                                                <th rowspan="1" colspan="1">Browser</th>
-                                                <th rowspan="1" colspan="1">Platform(s)</th>
-                                                <th rowspan="1" colspan="1">Engine version</th>
-                                                <th rowspan="1" colspan="1">CSS grade</th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>

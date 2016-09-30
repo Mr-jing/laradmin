@@ -12,7 +12,12 @@ class MenuController extends Controller
 {
     public function index()
     {
-        return view('admin.menu.index');
+        $menus = Menu::orderBy('sort', 'ASC')
+            ->get()
+            ->toArray();
+        return view('admin.menu.index', [
+            'menus' => Menu::unlimitedForLevel($menus, 0, '------')
+        ]);
     }
 
     public function create()
@@ -42,17 +47,6 @@ class MenuController extends Controller
                 ->withErrors(array('保存失败，请刷新页面后重试'));
         }
         return redirect()->route('admin.menus.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
