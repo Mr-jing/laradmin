@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateRoleRequest;
 
 use App\Http\Controllers\Controller;
 
@@ -16,25 +17,22 @@ class RoleController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.role.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CreateRoleRequest $request)
     {
-        //
+        $role = new Role();
+        $role->name = trim($request->role_name);
+        if (!$role->save()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(array('保存失败，请刷新页面后重试'));
+        }
+        return redirect()->route('admin.roles.index');
     }
 
     /**
