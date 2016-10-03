@@ -13,8 +13,9 @@ class CreateRoleRequest extends Request
 
     public function rules()
     {
+        $id = intval($this->route('roles'));
         return [
-            'role_name' => 'required|string|between:1,20|unique:roles,name',
+            'role_name' => 'required|string|between:1,20|unique:roles,name,' . $id,
             'role_description' => 'string|between:0,255',
         ];
     }

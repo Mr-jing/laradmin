@@ -80,7 +80,8 @@
                                                                role="button" class="btn btn-default btn-flat">
                                                                 <i class="fa fa-gear "></i>
                                                             </a>
-                                                            <a title="编辑" role="button"
+                                                            <a href="{{action('Admin\RoleController@edit', ['id' => $role->id])}}"
+                                                               title="编辑" role="button"
                                                                class="btn btn-default btn-flat">
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>

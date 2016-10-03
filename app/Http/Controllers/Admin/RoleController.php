@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
-use Illuminate\Http\Request;
 use App\Http\Requests\CreateRoleRequest;
 
 use App\Http\Controllers\Controller;
@@ -26,6 +25,8 @@ class RoleController extends Controller
     {
         $role = new Role();
         $role->name = trim($request->role_name);
+        $role->description = trim($request->role_description);
+        // TODO try
         if (!$role->save()) {
             return redirect()
                 ->back()
@@ -35,48 +36,34 @@ class RoleController extends Controller
         return redirect()->route('admin.roles.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $role = Role::findOrFail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $role = Role::findOrFail($id);
+        return view('admin.role.edit', [
+            'role' => $role
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(CreateRoleRequest $request, $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role->name = trim($request->role_name);
+        $role->description = trim($request->role_description);
+        if (!$role->save()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(array('保存失败，请刷新页面后重试'));
+        }
+        return redirect()->route('admin.roles.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
     }
 }
