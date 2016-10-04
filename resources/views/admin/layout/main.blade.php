@@ -24,6 +24,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/css/sweetalert.css')}}">
 @yield('after.css')
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -68,6 +69,7 @@
 {{--<script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>--}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+<script src="{{asset('dist/js/sweetalert.min.js')}}"></script>
 <script src="{{asset('dist/js/main.js')}}"></script>
 @yield('after.js')
 </body>
