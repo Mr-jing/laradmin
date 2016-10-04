@@ -18,12 +18,32 @@ $(function () {
     $('.delete_action').click(function () {
         var self = $(this);
 
-        var data = {
-            _method: self.data('method')
-        };
+        swal({
+            title: "确定删除？",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "取消",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+            closeOnConfirm: false
+        }, function () {
+            var data = {
+                _method: self.data('method')
+            };
 
-        $.post(self.data('url'), data, function (obj) {
-            console.log(obj);
-        }, 'json');
+            $.post(self.data('url'), data, function (obj) {
+                if (obj.status) {
+                    swal({
+                        title: "删除成功!",
+                        type: "success",
+                        confirmButtonText: "确定"
+                    }, function () {
+                        window.location.reload(true);
+                    });
+                } else {
+                    swal("删除失败!", obj.msg, "error");
+                }
+            }, 'json');
+        });
     });
 });
