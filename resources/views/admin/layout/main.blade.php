@@ -6,6 +6,7 @@
     <title>Laradmin</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="{!! csrf_token() !!}" name="csrf-token">
 
 @yield('before.css')
 <!-- Bootstrap 3.3.6 -->
@@ -64,9 +65,10 @@
 <!-- ChartJS 1.0.1 -->
 <script src="{{asset('plugins/chartjs/Chart.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>
+{{--<script src="{{asset('dist/js/pages/dashboard2.js')}}"></script>--}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+<script src="{{asset('dist/js/main.js')}}"></script>
 @yield('after.js')
 </body>
 </html>

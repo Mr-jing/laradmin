@@ -65,5 +65,27 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
+        $role = Role::findOrFail($id);
+        $count = $role->users()->count();
+        if ($count > 0) {
+            return response()->json([
+                'status' => false,
+                'msg' => '该角色已被赋予用户，无法删除',
+                'data' => array()
+            ]);
+        }
+        if ($role->delete()) {
+            // TODO 删除 role_user、role_menu、role_route、permission_role 的记录
+            return response()->json([
+                'status' => true,
+                'msg' => '删除成功',
+                'data' => array()
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'msg' => '删除失败，请刷新后重试',
+            'data' => array()
+        ]);
     }
 }
