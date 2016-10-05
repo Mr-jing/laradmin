@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateMenuRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use App\Models\Role;
 
 class MenuController extends Controller
 {
@@ -53,7 +54,15 @@ class MenuController extends Controller
     {
         $menu = Menu::findOrFail($id);
 
-        var_dump($menu->roles()->get());
+        $allRoles = Role::all()->toArray();
+//        var_dump($allRoles);
+
+        $checkedRoles = $menu->roles()->get()->toArray();
+//        var_dump($checkedRoles);
+
+        return view('admin.menu.show', [
+            'allRoles' => $allRoles
+        ]);
     }
 
     public function setting(Request $request, $id)
