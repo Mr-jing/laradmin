@@ -10,8 +10,7 @@
         <section class="content-header">
             <h1>角色列表</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Tables</a></li>
+                <li><a href="{{url('/admin')}}"><i class="fa fa-dashboard"></i>首页</a></li>
                 <li class="active">角色列表</li>
             </ol>
         </section>
@@ -21,18 +20,17 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">角色列表</h3>
+                        <div class="box-header" style="margin-bottom: -15px;">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <a href="{{url('admin/roles/create')}}" class="btn btn-block btn-success"
+                                       role="button">添加角色</a>
+                                </div>
+                                <div class="col-sm-10"></div>
+                            </div>
                         </div>
                         <div class="box-body">
                             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row" style="margin-bottom: 15px;">
-                                    <div class="col-sm-2">
-                                        <a href="{{url('admin/roles/create')}}" class="btn btn-block btn-success"
-                                           role="button">添加角色</a>
-                                    </div>
-                                    <div class="col-sm-10"></div>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -48,12 +46,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="example1"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 163px;">唯一标识
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="example1"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 163px;">名称
+                                                    style="width: 163px;">唯一名称
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending"
@@ -72,7 +65,6 @@
                                                 <tr role="row" class="odd">
                                                     <td>{{$role['id']}}</td>
                                                     <td>{{$role['name']}}</td>
-                                                    <td>{{$role['display_name']}}</td>
                                                     <td>{{$role['description']}}</td>
                                                     <td>
                                                         <div class="btn-group">
