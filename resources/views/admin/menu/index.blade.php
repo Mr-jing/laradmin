@@ -25,7 +25,7 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                     <a href="{{url('admin/menus/create')}}" class="btn btn-block btn-success"
-                                       role="button">添加菜单</a>
+                                       role="button"><i class="fa fa-plus-circle"></i>添加菜单</a>
                                 </div>
                                 <div class="col-sm-10"></div>
                             </div>

@@ -50,4 +50,30 @@ $(function () {
     $('#check-all').click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
     });
+
+    $('#menu-setting-btn').click(function () {
+        var self = $(this);
+        var roleIds = [];
+        $('.role-id:checked').each(function (index, element) {
+            roleIds.push($(element).data('id'));
+        });
+
+        var data = {
+            "role_ids[]": roleIds
+        };
+        console.log(roleIds, self.data('url'), data);
+        $.post(self.data('url'), data, function (obj) {
+            // if (obj.status) {
+            //     swal({
+            //         title: "删除成功!",
+            //         type: "success",
+            //         confirmButtonText: "确定"
+            //     }, function () {
+            //         window.location.reload(true);
+            //     });
+            // } else {
+            //     swal("删除失败!", obj.msg, "error");
+            // }
+        }, 'json');
+    });
 });

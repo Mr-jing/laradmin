@@ -61,12 +61,15 @@ class MenuController extends Controller
 //        var_dump($checkedRoles);
 
         return view('admin.menu.show', [
-            'allRoles' => $allRoles
+            'allRoles' => $allRoles,
+            'menuId' => $id,
         ]);
     }
 
-    public function setting(Request $request, $id)
+    public function postSetting(Request $request, $id)
     {
+        var_dump($id);
+        dd($request->role_ids);
     }
 
     public function edit($id)

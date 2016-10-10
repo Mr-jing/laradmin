@@ -8,11 +8,11 @@
     <div class="content-wrapper" style="min-height: 916px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>角色列表</h1>
+            <h1>菜单权限设置</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Tables</a></li>
-                <li class="active">角色列表</li>
+                <li><a href="{{url('/admin')}}">首页</a></li>
+                <li><a href="{{url('/admin/menus')}}">菜单列表</a></li>
+                <li class="active">菜单权限设置</li>
             </ol>
         </section>
 
@@ -25,19 +25,29 @@
                             <table class="table table-bordered">
                                 <tbody>
                                 <tr>
-                                    <th style="width: 10px"><input title="全选" type="checkbox" id="check-all"></th>
+                                    <th style="width: 60px;">
+                                        <input title="全选" type="checkbox" id="check-all">
+                                        <label for="check-all">全选</label>
+                                    </th>
                                     <th>角色名称</th>
                                     <th>角色描述</th>
                                 </tr>
                                 @foreach($allRoles as $role)
                                     <tr>
-                                        <td><input type="checkbox" class="checkbox"></td>
+                                        <td><input type="checkbox" class="checkbox role-id" data-id="{{$role['id']}}">
+                                        </td>
                                         <td>{{$role['name']}}</td>
                                         <td>{{$role['description']}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消</button>
+                            <button type="submit" class="btn btn-info pull-right" id="menu-setting-btn"
+                                    data-url="{{action('Admin\MenuController@postSetting', ['menus' => $menuId])}}">提交
+                            </button>
                         </div>
                     </div>
                 </div>

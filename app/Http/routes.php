@@ -11,6 +11,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     // 菜单显示
     Route::resource('menus', 'MenuController');
+    Route::post('/menus/{menus}/setting', ['uses' => 'MenuController@postSetting']);
 
     // 访问权限
     Route::resource('routes', 'RouteController', ['except' => ['show']]);
