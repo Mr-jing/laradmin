@@ -1,87 +1,100 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use App\Route;
 
 class RouteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $routes = Route::orderBy('uri', 'asc')->get()
+            ->groupBy('group');
+        return view('admin.route.index', [
+            'routeGroups' => $routes
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.route.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'route_display_name' => 'required|max:255',
+            'route_method' => 'required|max:20|in:GET,POST,PUT,DELETE',
+            'route_uri' => 'required|max:255',
+        ]);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors($validator->errors());
+        }
+        $route = new Route();
+        $route->display_name = trim($request->route_display_name);
+        $route->method = $request->route_method;
+        $route->uri = trim($request->route_uri);
+        $re = $route->save();
+        if (!$re) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(array('保存失败，请刷新页面后重试'));
+        }
+        return redirect()->route('admin.routes.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $route = Route::findOrFail($id);
+        return view('admin.route.edit', [
+            'route' => $route,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $route = Route::findOrFail($id);
+        $validator = Validator::make($request->all(), [
+            'route_display_name' => 'required|max:255',
+            'route_method' => 'required|max:20|in:GET,POST,PUT,DELETE',
+            'route_uri' => 'required|max:255',
+        ]);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors($validator->errors());
+        }
+        $route->display_name = trim($request->route_display_name);
+        $route->method = $request->route_method;
+        $route->uri = trim($request->route_uri);
+        $re = $route->save();
+        if (!$re) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(array('保存失败，请刷新页面后重试'));
+        }
+        return redirect()->route('admin.routes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $route = Route::findOrFail($id);
+        // 删除权限和角色的关联数据
+        $route->roles()->detach();
+        // 删除权限
+        $route->delete();
+        return response()->json([
+            'status' => true,
+            'msg' => '删除成功',
+            'data' => array()
+        ]);
     }
 }
