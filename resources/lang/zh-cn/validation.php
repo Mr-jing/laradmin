@@ -113,5 +113,9 @@ return [
     'menu_name' => [
         'required' => '菜单名称是必填的.',
     ],
+    'role_ids' => [
+        'required' => '角色编号是必填的.',
+        'array' => '角色编号格式有误.',
+    ],
 
 ];

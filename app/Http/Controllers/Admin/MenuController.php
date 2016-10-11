@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\SetRolesOfMenuRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\CreateMenuRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -66,10 +68,28 @@ class MenuController extends Controller
         ]);
     }
 
-    public function postSetting(Request $request, $id)
+    public function postSetting(SetRolesOfMenuRequest $request, $id)
     {
-        var_dump($id);
-        dd($request->role_ids);
+        $menu = Menu::findOrFail($id);
+
+        $roleIds = array_unique($request->role_ids);
+        $newRoles = empty($roleIds) ? array() : Role::whereIn('id', $roleIds)->get();
+
+        DB::transaction(function () use ($menu, $newRoles) {
+            // 删除所有
+            $menu->roles()->detach();
+
+            // 重新添加
+            $menu->roles()->saveMany($newRoles);
+
+        });
+        return response()->json([
+            'status' => true,
+            'msg' => '设置成功',
+            'data' => array(
+                'url' => route('admin.menus.index'),
+            )
+        ]);
     }
 
     public function edit($id)

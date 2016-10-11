@@ -63,17 +63,21 @@ $(function () {
         };
         console.log(roleIds, self.data('url'), data);
         $.post(self.data('url'), data, function (obj) {
-            // if (obj.status) {
-            //     swal({
-            //         title: "删除成功!",
-            //         type: "success",
-            //         confirmButtonText: "确定"
-            //     }, function () {
-            //         window.location.reload(true);
-            //     });
-            // } else {
-            //     swal("删除失败!", obj.msg, "error");
-            // }
+            if (obj.status) {
+                swal({
+                    title: "设置成功!",
+                    type: "success",
+                    confirmButtonText: "确定"
+                }, function () {
+                    if (obj.data && obj.data.url) {
+                        window.location.href = obj.data.url;
+                    } else {
+                        window.location.reload(true);
+                    }
+                });
+            } else {
+                swal("设置失败!", obj.msg, "error");
+            }
         }, 'json');
     });
 });
