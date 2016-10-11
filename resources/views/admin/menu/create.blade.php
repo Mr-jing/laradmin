@@ -36,12 +36,10 @@
                                 <div class="form-group">
                                     <label for="parent_id" class="col-sm-2 control-label">父级菜单</label>
                                     <div class="col-sm-10">
-                                        <select id="parent_id" name="menu_parent_id" class="form-control">
-                                            <option value="0">option 0</option>
-                                            <option value="1">option 1</option>
-                                            <option value="2">option 2</option>
-                                            <option value="3">option 3</option>
-                                        </select>
+                                        {!! \Form::select('menu_parent_id', $menuOptions, 0, [
+                                            'id' => 'parent_id',
+                                            'class' => 'form-control',
+                                        ]) !!}
                                     </div>
                                 </div>
                                 <div class="form-group">

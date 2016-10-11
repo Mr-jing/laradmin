@@ -25,7 +25,16 @@ class MenuController extends Controller
 
     public function create()
     {
-        return view('admin.menu.create');
+        $menus = Menu::orderBy('sort', 'ASC')
+            ->select('id', 'name')
+            ->where('parent_id', 0)
+            ->get()
+            ->toArray();
+
+        $menuOptions = array(0 => '无') + array_column($menus, 'name', 'id');
+        return view('admin.menu.create', [
+            'menuOptions' => $menuOptions
+        ]);
     }
 
     public function store(CreateMenuRequest $request)
