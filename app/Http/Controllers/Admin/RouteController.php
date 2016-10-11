@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateRouteRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-use App\Route;
+use App\Models\Route;
 
 class RouteController extends Controller
 {
@@ -12,6 +13,8 @@ class RouteController extends Controller
     {
         $routes = Route::orderBy('uri', 'asc')->get()
             ->groupBy('group');
+
+        dd($routes);
         return view('admin.route.index', [
             'routeGroups' => $routes
         ]);
@@ -22,25 +25,13 @@ class RouteController extends Controller
         return view('admin.route.create');
     }
 
-    public function store(Request $request)
+    public function store(CreateRouteRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'route_display_name' => 'required|max:255',
-            'route_method' => 'required|max:20|in:GET,POST,PUT,DELETE',
-            'route_uri' => 'required|max:255',
-        ]);
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->withErrors($validator->errors());
-        }
         $route = new Route();
-        $route->display_name = trim($request->route_display_name);
+        $route->name = trim($request->route_name);
         $route->method = $request->route_method;
         $route->uri = trim($request->route_uri);
-        $re = $route->save();
-        if (!$re) {
+        if (!$route->save()) {
             return redirect()
                 ->back()
                 ->withInput()
