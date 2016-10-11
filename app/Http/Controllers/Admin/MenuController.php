@@ -57,13 +57,12 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
 
         $allRoles = Role::all()->toArray();
-//        var_dump($allRoles);
 
-        $checkedRoles = $menu->roles()->get()->toArray();
-//        var_dump($checkedRoles);
+        $checkedRoleIds = $menu->roles()->get()->modelKeys();
 
         return view('admin.menu.show', [
             'allRoles' => $allRoles,
+            'checkedRoleIds' => $checkedRoleIds,
             'menuId' => $id,
         ]);
     }

@@ -34,8 +34,13 @@
                                 </tr>
                                 @foreach($allRoles as $role)
                                     <tr>
-                                        <td><input type="checkbox" class="checkbox role-id" data-id="{{$role['id']}}">
-                                        </td>
+                                        @if(in_array($role['id'], $checkedRoleIds, true))
+                                            <td><input type="checkbox" class="checkbox role-id"
+                                                       data-id="{{$role['id']}}" checked="checked"></td>
+                                        @else
+                                            <td><input type="checkbox" class="checkbox role-id"
+                                                       data-id="{{$role['id']}}"></td>
+                                        @endif
                                         <td>{{$role['name']}}</td>
                                         <td>{{$role['description']}}</td>
                                     </tr>
