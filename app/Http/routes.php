@@ -4,6 +4,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::controller('admin/auth', 'Admin\AuthController');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     // 后台入口
