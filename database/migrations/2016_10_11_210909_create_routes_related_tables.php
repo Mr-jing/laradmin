@@ -17,6 +17,7 @@ class CreateRoutesRelatedTables extends Migration
             $table->string('name');
             $table->char('method', 20);
             $table->string('uri');
+            $table->char('group', 20)->default('');
             $table->timestamps();
             $table->unique(['method', 'uri']);
         });

@@ -33,10 +33,17 @@
 
                             <div class="box-body">
                                 <div class="form-group">
+                                    <label for="group" class="col-sm-2 control-label">分组名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="group" name="route_group"
+                                               placeholder="输入分组名称，例如：用户管理">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="name" class="col-sm-2 control-label">权限名称</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="name" name="route_name"
-                                               placeholder="输入权限名称，例如：用户列表">
+                                               placeholder="输入权限名称，例如：用户列表页面">
                                     </div>
                                 </div>
                                 <div class="form-group">

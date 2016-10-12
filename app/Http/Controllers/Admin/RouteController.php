@@ -14,7 +14,6 @@ class RouteController extends Controller
         $routes = Route::orderBy('uri', 'asc')->get()
             ->groupBy('group');
 
-        dd($routes);
         return view('admin.route.index', [
             'routeGroups' => $routes
         ]);
@@ -31,6 +30,7 @@ class RouteController extends Controller
         $route->name = trim($request->route_name);
         $route->method = $request->route_method;
         $route->uri = trim($request->route_uri);
+        $route->group = $request->has('route_group') ? trim($request->route_group) : '';
         if (!$route->save()) {
             return redirect()
                 ->back()

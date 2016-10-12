@@ -17,6 +17,7 @@ class CreateRouteRequest extends Request
             'route_name' => 'required|string|between:1,15',
             'route_method' => 'required|max:20|in:GET,POST,PUT,DELETE',
             'route_uri' => 'required|max:255',
+            'route_group' => 'string|between:0,20',
         ];
     }
 
