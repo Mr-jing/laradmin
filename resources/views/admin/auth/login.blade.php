@@ -32,13 +32,16 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
 
-        <form action="../../index2.html" method="post">
+        <form action="{{action('Admin\AuthController@postLogin')}}" method="post">
+
+            {!! csrf_field() !!}
+
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="邮箱">
+                <input type="email" name="email" class="form-control" placeholder="邮箱">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码">
+                <input type="password" name="password" class="form-control" placeholder="密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -51,7 +54,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block ">登录</button>
+                    <button type="submit" class="btn btn-primary btn-block">登录</button>
                 </div>
                 <!-- /.col -->
             </div>

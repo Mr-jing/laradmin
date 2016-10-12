@@ -4,6 +4,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
 Route::controller('admin/auth', 'Admin\AuthController');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
