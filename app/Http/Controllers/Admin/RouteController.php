@@ -15,11 +15,9 @@ class RouteController extends Controller
 {
     public function index()
     {
-        $routes = Route::orderBy('uri', 'asc')->get()
-            ->groupBy('group');
-
+        $routes = Route::orderBy('uri', 'asc')->get();
         return view('admin.route.index', [
-            'routeGroups' => $routes
+            'routes' => $routes
         ]);
     }
 
