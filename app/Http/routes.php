@@ -18,7 +18,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'role
     Route::post('/menus/{menus}/setting', ['uses' => 'MenuController@postSetting']);
 
     // 访问权限
-    Route::resource('routes', 'RouteController', ['except' => ['show']]);
+    Route::resource('routes', 'RouteController');
+    Route::post('/routes/{routes}/setting', ['uses' => 'RouteController@postSetting']);
 
     // 用户角色
     Route::resource('roles', 'RoleController', ['except' => ['show']]);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\SetRolesOfMenuRequest;
+use App\Http\Requests\SetRoleIdsRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\CreateMenuRequest;
@@ -76,7 +76,7 @@ class MenuController extends Controller
         ]);
     }
 
-    public function postSetting(SetRolesOfMenuRequest $request, $id)
+    public function postSetting(SetRoleIdsRequest $request, $id)
     {
         $menu = Menu::findOrFail($id);
 

@@ -2,10 +2,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CreateRouteRequest;
+use App\Http\Requests\SetRoleIdsRequest;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Route;
+use App\Models\Role;
 
 class RouteController extends Controller
 {
@@ -31,13 +34,62 @@ class RouteController extends Controller
         $route->method = $request->route_method;
         $route->uri = trim($request->route_uri);
         $route->group = $request->has('route_group') ? trim($request->route_group) : '';
-        if (!$route->save()) {
+
+        try {
+            $status = $route->save();
+        } catch (QueryException $e) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(array('该权限已存在，请勿重复添加'));
+        }
+
+        if (!$status) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->withErrors(array('保存失败，请刷新页面后重试'));
         }
-        return redirect()->route('admin.routes.index');
+        return redirect()->action('Admin\RouteController@show', ['id' => $route->id]);
+    }
+
+    public function show($id)
+    {
+        $route = Route::findOrFail($id);
+
+        $allRoles = Role::all()->toArray();
+
+        $checkedRoleIds = $route->roles()->get()->modelKeys();
+
+        return view('admin.route.show', [
+            'allRoles' => $allRoles,
+            'checkedRoleIds' => $checkedRoleIds,
+            'routeId' => $id,
+        ]);
+    }
+
+    public function postSetting(SetRoleIdsRequest $request, $id)
+    {
+        $menu = Menu::findOrFail($id);
+
+        $roleIds = array_unique($request->role_ids);
+        $newRoles = empty($roleIds) ? array() : Role::whereIn('id', $roleIds)->get();
+
+        DB::transaction(function () use ($menu, $newRoles) {
+            // 删除所有
+            $menu->roles()->detach();
+
+            // 重新添加
+            $menu->roles()->saveMany($newRoles);
+
+        });
+        return response()->json([
+            'status' => true,
+            'msg' => '设置成功',
+            'data' => array(
+                'url' => route('admin.menus.index'),
+            )
+        ]);
     }
 
     public function edit($id)
