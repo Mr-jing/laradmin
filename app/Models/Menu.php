@@ -27,6 +27,17 @@ class Menu extends Model
         return $arr;
     }
 
+    public static function unlimited($category, $keyName = 'children', $pid = 0)
+    {
+        $arr = array();
+        foreach ($category as $v) {
+            if ($v['parent_id'] == $pid) {
+                $v[$keyName] = self::unlimited($category, $keyName, $v['id']);
+                $arr[] = $v;
+            }
+        }
+        return $arr;
+    }
 
     public function roles()
     {

@@ -19,7 +19,7 @@ class MenuController extends Controller
             ->get()
             ->toArray();
         return view('admin.menu.index', [
-            'menus' => Menu::unlimitedForLevel($menus, 0, '------')
+            'menus' => Menu::unlimitedForLevel($menus, 0, '------'),
         ]);
     }
 
@@ -58,7 +58,7 @@ class MenuController extends Controller
                 ->withInput()
                 ->withErrors(array('保存失败，请刷新页面后重试'));
         }
-        return redirect()->route('admin.menus.index');
+        return redirect()->action('Admin\MenuController@show', ['id' => $menu->id]);
     }
 
     public function show($id)
