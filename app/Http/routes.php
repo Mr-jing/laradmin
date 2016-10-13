@@ -9,7 +9,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::controller('admin/auth', 'Admin\AuthController');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'role.route'], function () {
     // 后台入口
     Route::get('/', ['uses' => 'AdminController@index']);
 
