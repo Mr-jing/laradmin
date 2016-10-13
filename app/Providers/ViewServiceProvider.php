@@ -16,6 +16,10 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        view()->composer('admin.layout.header', function (View $view) {
+            $view->with('currentUser', Auth::user());
+        });
+
         view()->composer('admin.layout.sidebar', function (View $view) {
             // 当前后台用户
             $user = Auth::user();
