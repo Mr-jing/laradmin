@@ -5,6 +5,7 @@ use App\Http\Requests\CreateRouteRequest;
 use App\Http\Requests\SetRoleIdsRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Route;
@@ -70,24 +71,24 @@ class RouteController extends Controller
 
     public function postSetting(SetRoleIdsRequest $request, $id)
     {
-        $menu = Menu::findOrFail($id);
+        $route = Route::findOrFail($id);
 
         $roleIds = array_unique($request->role_ids);
         $newRoles = empty($roleIds) ? array() : Role::whereIn('id', $roleIds)->get();
 
-        DB::transaction(function () use ($menu, $newRoles) {
+        DB::transaction(function () use ($route, $newRoles) {
             // 删除所有
-            $menu->roles()->detach();
+            $route->roles()->detach();
 
             // 重新添加
-            $menu->roles()->saveMany($newRoles);
+            $route->roles()->saveMany($newRoles);
 
         });
         return response()->json([
             'status' => true,
             'msg' => '设置成功',
             'data' => array(
-                'url' => route('admin.menus.index'),
+                'url' => route('admin.routes.index'),
             )
         ]);
     }
