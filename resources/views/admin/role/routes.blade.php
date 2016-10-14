@@ -50,7 +50,7 @@
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消</button>
-                            <button type="submit" class="btn btn-info pull-right" id="menu-setting-btn"
+                            <button type="submit" class="btn btn-info pull-right" id="role-set-routes-btn"
                                     data-url="{{action('Admin\RoleController@postRoutes', ['roles' => $role->id])}}">提交
                             </button>
                         </div>

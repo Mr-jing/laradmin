@@ -61,7 +61,6 @@ $(function () {
         var data = {
             "role_ids[]": roleIds
         };
-        console.log(roleIds, self.data('url'), data);
         $.post(self.data('url'), data, function (obj) {
             if (obj.status) {
                 swal({
@@ -80,4 +79,35 @@ $(function () {
             }
         }, 'json');
     });
+
+    $('#role-set-routes-btn').click(function () {
+        var self = $(this);
+        var routeIds = [];
+        $('.route-id:checked').each(function (index, element) {
+            routeIds.push($(element).data('id'));
+        });
+
+        var data = {
+            "route_ids[]": routeIds
+        };
+        $.post(self.data('url'), data, function (obj) {
+            if (obj.status) {
+                swal({
+                    title: "设置成功!",
+                    type: "success",
+                    confirmButtonText: "确定"
+                }, function () {
+                    if (obj.data && obj.data.url) {
+                        window.location.href = obj.data.url;
+                    } else {
+                        window.location.reload(true);
+                    }
+                });
+            } else {
+                swal("设置失败!", obj.msg, "error");
+            }
+        }, 'json');
+    });
+
+
 });

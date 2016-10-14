@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\SetRouteIdsRequest;
 use App\Models\Role;
 use App\Http\Requests\CreateRoleRequest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Route;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -104,44 +106,28 @@ class RoleController extends Controller
         ]);
     }
 
-    public function postRoutes(Request $request, $id)
+    public function postRoutes(SetRouteIdsRequest $request, $id)
     {
         // 获取角色
         $role = Role::findOrFail($id);
-        // 验证提交的参数
-        $validator = Validator::make($request->all(), [
-            'route_ids' => 'array',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['status' => false,
-                'info' => $validator->errors()->first(),
-                'data' => array()]);
-        }
-        // 先删除该角色所拥有的 route 权限
-        $count = $role->routes()->detach();
-        if (!is_numeric($count)) {
-            return response()->json(['status' => false,
-                'info' => '删除权限失败，请刷新后重试',
-                'data' => array()]);
-        }
-        $successRes = ['status' => true,
-            'info' => '设置成功',
+
+        $routeIds = array_unique($request->route_ids);
+        $newRoutes = empty($routeIds) ? array() : Route::whereIn('id', $routeIds)->get();
+
+        DB::transaction(function () use ($role, $newRoutes) {
+            // 删除所有
+            $role->routes()->detach();
+
+            // 重新添加
+            $role->routes()->saveMany($newRoutes);
+        });
+        return response()->json([
+            'status' => true,
+            'msg' => '设置成功',
             'data' => array(
                 'url' => route('admin.roles.index'),
-            )];
-        if (empty($request->route_ids) || !is_array($request->route_ids)) {
-            return response()->json($successRes);
-        }
-        // 为角色添加 route 权限
-        $routeIds = array_unique($request->route_ids);
-        $routes = [];
-        foreach ($routeIds as $routeId) {
-            if ($route = Route::find($routeId)) {
-                $routes[] = $route;
-            }
-        }
-        $role->routes()->saveMany($routes);
-        return response()->json($successRes);
+            )
+        ]);
     }
 
     public function getMenus($id)
