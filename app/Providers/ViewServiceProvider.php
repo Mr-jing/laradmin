@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Menu;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
@@ -43,6 +44,7 @@ class ViewServiceProvider extends ServiceProvider
                 ->toArray();
             foreach ($menus as &$menu) {
                 $menu['is_show'] = in_array($menu['id'], $checkedMenuIds);
+                $menu['active'] = false;
             }
 
             $systemMenus = Menu::unlimited($menus);
@@ -52,6 +54,11 @@ class ViewServiceProvider extends ServiceProvider
                 foreach ($menu['children'] as $key => $subMenu) {
                     if (!$subMenu['is_show']) {
                         unset($menu['children'][$key]);
+                    }
+                    if (Request::is($subMenu['url'] . '*')) {
+                        $menu['children'][$key]['active'] = true;
+                        $menu['active'] = true;
+                        break;
                     }
                 }
                 if (0 === count($menu['children'])) {

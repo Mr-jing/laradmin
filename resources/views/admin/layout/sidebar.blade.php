@@ -15,7 +15,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             @foreach($systemMenus as $menu)
-                <li class="treeview">
+                <li class="treeview {{$menu['active'] ? 'active' : ''}}">
                     <a href="javascript:void(0);">
                         <i class="fa fa-dashboard"></i>
                         <span>{{$menu['name']}}</span>
@@ -23,9 +23,10 @@
                     </a>
                     <ul class="treeview-menu">
                         @foreach($menu['children'] as $subMenu)
-                            <li><a href="{{url($subMenu['url'])}}"><i
-                                            class="fa fa-circle-o"></i>{{$subMenu['name']}}
-                                </a></li>
+                            <li class="{{$subMenu['active'] ? 'active' : ''}}">
+                                <a href="{{url($subMenu['url'])}}"><i class="fa fa-circle-o"></i>{{$subMenu['name']}}
+                                </a>
+                            </li>
                         @endforeach
                     </ul>
                 </li>
