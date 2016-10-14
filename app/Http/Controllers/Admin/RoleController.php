@@ -143,7 +143,7 @@ class RoleController extends Controller
 
         return view('admin.role.menus', [
             'role' => $role,
-            'menus' => Menu::unlimited($allMenus),
+            'menus' => Menu::unlimitedForLevel($allMenus, 0, '----'),
         ]);
     }
 

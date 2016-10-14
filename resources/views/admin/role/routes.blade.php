@@ -20,39 +20,56 @@
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="box">
-                        <div class="box-body">
-                            <table class="table table-bordered">
-                                <tbody>
-                                <tr>
-                                    <th style="width: 60px;">
-                                        <input title="全选" type="checkbox" id="check-all">
-                                        <label for="check-all">全选</label>
-                                    </th>
-                                    <th>权限名称</th>
-                                    <th>method:uri</th>
-                                </tr>
-                                @foreach($routes as $route)
-                                    <tr>
-                                        @if($route['checked'])
-                                            <td><input type="checkbox" class="checkbox route-id"
-                                                       data-id="{{$route['id']}}" checked="checked"></td>
-                                        @else
-                                            <td><input type="checkbox" class="checkbox route-id"
-                                                       data-id="{{$route['id']}}"></td>
-                                        @endif
-                                        <td>{{$route['name']}}</td>
-                                        <td>{{$route['method']}}:{{$route['uri']}}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消</button>
-                            <button type="submit" class="btn btn-info pull-right" id="role-set-routes-btn"
-                                    data-url="{{action('Admin\RoleController@postRoutes', ['roles' => $role->id])}}">提交
-                            </button>
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="{{action('Admin\RoleController@getRoutes', ['roles' => $role->id])}}">设置权限</a>
+                            </li>
+                            <li>
+                                <a href="{{action('Admin\RoleController@getMenus', ['roles' => $role->id])}}">设置菜单</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+                                <div class="box">
+                                    <div class="box-body">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                            <tr>
+                                                <th style="width: 60px;">
+                                                    <input title="全选" type="checkbox" id="check-all">
+                                                    <label for="check-all">全选</label>
+                                                </th>
+                                                <th>权限名称</th>
+                                                <th>method:uri</th>
+                                            </tr>
+                                            @foreach($routes as $route)
+                                                <tr>
+                                                    @if($route['checked'])
+                                                        <td><input type="checkbox" class="checkbox route-id"
+                                                                   data-id="{{$route['id']}}" checked="checked"></td>
+                                                    @else
+                                                        <td><input type="checkbox" class="checkbox route-id"
+                                                                   data-id="{{$route['id']}}"></td>
+                                                    @endif
+                                                    <td>{{$route['name']}}</td>
+                                                    <td>{{$route['method']}}:{{$route['uri']}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消
+                                        </button>
+                                        <button type="submit" class="btn btn-info pull-right" id="role-set-routes-btn"
+                                                data-url="{{action('Admin\RoleController@postRoutes', ['roles' => $role->id])}}">
+                                            提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
