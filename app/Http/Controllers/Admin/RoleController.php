@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\SetMenuIdsRequest;
 use App\Http\Requests\SetRouteIdsRequest;
 use App\Models\Menu;
 use App\Models\Role;
@@ -147,47 +148,27 @@ class RoleController extends Controller
         ]);
     }
 
-    public function postMenus(Request $request, $id)
+    public function postMenus(SetMenuIdsRequest $request, $id)
     {
         // 获取角色
         $role = Role::findOrFail($id);
-        // 验证提交的参数
-        $validator = Validator::make($request->all(), [
-            'menu_ids' => 'array',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'msg' => $validator->errors()->first(),
-                'data' => array()
-            ]);
-        }
-        // 先删除该角色所拥有的菜单显示权限
-        $count = $role->menus()->detach();
-        if (!is_numeric($count)) {
-            return response()->json([
-                'status' => false,
-                'msg' => '删除失败，请刷新后重试',
-                'data' => array()
-            ]);
-        }
-        $successRes = ['status' => true,
+
+        $menuIds = array_unique($request->menu_ids);
+        $newMenus = empty($menuIds) ? array() : Menu::whereIn('id', $menuIds)->get();
+
+        DB::transaction(function () use ($role, $newMenus) {
+            // 删除所有
+            $role->menus()->detach();
+
+            // 重新添加
+            $role->menus()->saveMany($newMenus);
+        });
+        return response()->json([
+            'status' => true,
             'msg' => '设置成功',
             'data' => array(
                 'url' => route('admin.roles.index'),
-            )];
-        if (empty($request->menu_ids) || !is_array($request->menu_ids)) {
-            return response()->json($successRes);
-        }
-        // 为角色添加菜单显示权限
-        $menuIds = array_unique($request->menu_ids);
-        $menus = [];
-        foreach ($menuIds as $menuId) {
-            if ($menu = Menu::find($menuId)) {
-                $menus[] = $menu;
-            }
-        }
-        $role->menus()->saveMany($menus);
-        return response()->json($successRes);
+            )
+        ]);
     }
 }

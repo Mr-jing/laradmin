@@ -51,7 +51,7 @@ class MenuController extends Controller
         $menu->url = $request->has('menu_url') ? trim($request->menu_url) : '';
         $menu->parent_id = $parentId;
         $menu->sort = '0';
-        $menu->status = '0';
+        $menu->status = '1';
         if (!$menu->save()) {
             return redirect()
                 ->back()

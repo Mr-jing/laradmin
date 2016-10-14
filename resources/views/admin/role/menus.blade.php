@@ -61,7 +61,8 @@
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消
                                         </button>
-                                        <button type="submit" class="btn btn-info pull-right" id="menu-setting-btn"
+                                        <button type="submit" class="btn btn-info pull-right" id="set-ids-btn"
+                                                data-name="menu_ids[]"
                                                 data-url="{{action('Admin\RoleController@postMenus', ['roles' => $role->id])}}">
                                             提交
                                         </button>
