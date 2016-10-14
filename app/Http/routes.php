@@ -23,4 +23,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'role
 
     // 用户角色
     Route::resource('roles', 'RoleController', ['except' => ['show']]);
+    Route::get('/roles/{roles}/routes', ['uses' => 'RoleController@getRoutes']);
+    Route::post('/roles/{roles}/routes', ['uses' => 'RoleController@postRoutes']);
+    Route::get('/roles/{roles}/menus', ['uses' => 'RoleController@getMenus']);
+    Route::post('/roles/{roles}/menus', ['uses' => 'RoleController@postMenus']);
+
 });
