@@ -10,9 +10,8 @@
         <section class="content-header">
             <h1>菜单列表</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Tables</a></li>
-                <li class="active">Data tables</li>
+                <li><a href="{{url('admin')}}"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li class="active">菜单列表</li>
             </ol>
         </section>
 

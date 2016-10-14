@@ -24,7 +24,7 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                     <a href="{{url('admin/roles/create')}}" class="btn btn-block btn-success"
-                                       role="button">添加角色</a>
+                                       role="button"><i class="fa fa-plus-circle"></i>添加角色</a>
                                 </div>
                                 <div class="col-sm-10"></div>
                             </div>
@@ -38,11 +38,6 @@
                                                role="grid" aria-describedby="example1_info">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_desc" tabindex="0" aria-controls="example1"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 163px;">编号
-                                                </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Rendering engine: activate to sort column descending"
@@ -62,8 +57,7 @@
                                             <tbody>
 
                                             @foreach($roles as $role)
-                                                <tr role="row" class="odd">
-                                                    <td>{{$role['id']}}</td>
+                                                <tr role="row">
                                                     <td>{{$role['name']}}</td>
                                                     <td>{{$role['description']}}</td>
                                                     <td>

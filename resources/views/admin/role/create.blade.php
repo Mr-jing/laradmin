@@ -5,9 +5,9 @@
         <section class="content-header">
             <h1>添加角色</h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Tables</a></li>
-                <li class="active">Data tables</li>
+                <li><a href="{{url('admin')}}"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li><a href="{{url('admin/roles')}}">角色列表</a></li>
+                <li class="active">添加角色</li>
             </ol>
         </section>
 
@@ -49,7 +49,7 @@
                             </div>
 
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消</button>
+                                <button type="button" class="btn btn-default" onclick="history.go(-1);">取消</button>
                                 <button type="submit" class="btn btn-info pull-right">提交</button>
                             </div>
                         </form>
