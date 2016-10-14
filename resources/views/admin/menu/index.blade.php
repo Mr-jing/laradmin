@@ -75,8 +75,9 @@
                                                     <td>{{$menu['status']}}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a href="{{url('admin/menus', [$menu['id']])}}" title="设置"
-                                                               role="button" class="btn btn-default btn-flat">
+                                                            <a href="{{action('Admin\MenuController@getRoles', [$menu['id']])}}"
+                                                               title="设置" role="button"
+                                                               class="btn btn-default btn-flat">
                                                                 <i class="fa fa-gear "></i>
                                                             </a>
                                                             <a title="编辑" role="button"

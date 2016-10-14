@@ -58,25 +58,27 @@ class MenuController extends Controller
                 ->withInput()
                 ->withErrors(array('保存失败，请刷新页面后重试'));
         }
-        return redirect()->action('Admin\MenuController@show', ['id' => $menu->id]);
+        return redirect()->action('Admin\MenuController@getRoles', ['id' => $menu->id]);
     }
 
-    public function show($id)
+    public function getRoles($id)
     {
         $menu = Menu::findOrFail($id);
 
         $allRoles = Role::all()->toArray();
 
         $checkedRoleIds = $menu->roles()->get()->modelKeys();
+        foreach ($allRoles as &$role) {
+            $role['checked'] = in_array($role['id'], $checkedRoleIds, true);
+        }
 
-        return view('admin.menu.show', [
-            'allRoles' => $allRoles,
-            'checkedRoleIds' => $checkedRoleIds,
-            'menuId' => $id,
+        return view('admin.menu.roles', [
+            'menu' => $menu,
+            'roles' => $allRoles,
         ]);
     }
 
-    public function postSetting(SetRoleIdsRequest $request, $id)
+    public function postRoles(SetRoleIdsRequest $request, $id)
     {
         $menu = Menu::findOrFail($id);
 

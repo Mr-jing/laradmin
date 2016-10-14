@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Http\Requests\CreateRoleRequest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Route;
 
 class RoleController extends Controller
 {
@@ -93,9 +94,9 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $allRoutes = Route::orderBy('uri', 'asc')->get()->toArray();
-        $selectedRouteIds = array_column($role->routes->toArray(), 'id');
+        $checkedRouteIds = array_column($role->routes->toArray(), 'id');
         foreach ($allRoutes as &$route) {
-            $route['selected'] = in_array($route['id'], $selectedRouteIds);
+            $route['checked'] = in_array($route['id'], $checkedRouteIds, true);
         }
         return view('admin.role.routes', [
             'role' => $role,

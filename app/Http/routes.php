@@ -14,8 +14,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'role
     Route::get('/', ['uses' => 'AdminController@index']);
 
     // 菜单显示
-    Route::resource('menus', 'MenuController');
-    Route::post('/menus/{menus}/setting', ['uses' => 'MenuController@postSetting']);
+    Route::resource('menus', 'MenuController', ['except' => ['show']]);
+    Route::get('/menus/{menus}/roles', ['uses' => 'MenuController@getRoles']);
+    Route::post('/menus/{menus}/roles', ['uses' => 'MenuController@postRoles']);
 
     // 访问权限
     Route::resource('routes', 'RouteController');

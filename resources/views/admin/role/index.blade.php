@@ -68,8 +68,9 @@
                                                     <td>{{$role['description']}}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a href="{{url('admin/roles', [$role['id']])}}" title="设置"
-                                                               role="button" class="btn btn-default btn-flat">
+                                                            <a href="{{action('Admin\RoleController@getRoutes', [$role['id']])}}"
+                                                               title="设置" role="button"
+                                                               class="btn btn-default btn-flat">
                                                                 <i class="fa fa-gear "></i>
                                                             </a>
                                                             <a href="{{action('Admin\RoleController@edit', ['id' => $role->id])}}"
