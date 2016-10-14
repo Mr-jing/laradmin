@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\SetRouteIdsRequest;
+use App\Models\Menu;
 use App\Models\Role;
 use App\Http\Requests\CreateRoleRequest;
 
@@ -133,17 +134,16 @@ class RoleController extends Controller
     public function getMenus($id)
     {
         $role = Role::findOrFail($id);
-        $allMenus = Menu::where('level', '<=', 2)
-            ->orderBy('sort', 'DESC')
-            ->get()
-            ->toArray();
-        $selectedMenusIds = array_column($role->menus->toArray(), 'id');
+        $allMenus = Menu::orderBy('sort', 'DESC')->get()->toArray();
+
+        $checkedMenusIds = array_column($role->menus->toArray(), 'id');
         foreach ($allMenus as &$menu) {
-            $menu['selected'] = in_array($menu['id'], $selectedMenusIds);
+            $menu['checked'] = in_array($menu['id'], $checkedMenusIds);
         }
+
         return view('admin.role.menus', [
             'role' => $role,
-            'menus' => Menu::unlimitedForLayer($allMenus),
+            'menus' => Menu::unlimited($allMenus),
         ]);
     }
 
