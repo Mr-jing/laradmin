@@ -51,64 +51,6 @@ $(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
     });
 
-    $('#menu-setting-btn').click(function () {
-        var self = $(this);
-        var roleIds = [];
-        $('.role-id:checked').each(function (index, element) {
-            roleIds.push($(element).data('id'));
-        });
-
-        var data = {
-            "role_ids[]": roleIds
-        };
-        $.post(self.data('url'), data, function (obj) {
-            if (obj.status) {
-                swal({
-                    title: "设置成功!",
-                    type: "success",
-                    confirmButtonText: "确定"
-                }, function () {
-                    if (obj.data && obj.data.url) {
-                        window.location.href = obj.data.url;
-                    } else {
-                        window.location.reload(true);
-                    }
-                });
-            } else {
-                swal("设置失败!", obj.msg, "error");
-            }
-        }, 'json');
-    });
-
-    $('#role-set-routes-btn').click(function () {
-        var self = $(this);
-        var routeIds = [];
-        $('.route-id:checked').each(function (index, element) {
-            routeIds.push($(element).data('id'));
-        });
-
-        var data = {
-            "route_ids[]": routeIds
-        };
-        $.post(self.data('url'), data, function (obj) {
-            if (obj.status) {
-                swal({
-                    title: "设置成功!",
-                    type: "success",
-                    confirmButtonText: "确定"
-                }, function () {
-                    if (obj.data && obj.data.url) {
-                        window.location.href = obj.data.url;
-                    } else {
-                        window.location.reload(true);
-                    }
-                });
-            } else {
-                swal("设置失败!", obj.msg, "error");
-            }
-        }, 'json');
-    });
-
     $('#set-ids-btn').click(function () {
         var self = $(this);
         var ids = [];

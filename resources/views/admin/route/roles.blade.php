@@ -32,9 +32,9 @@
                                     <th>角色名称</th>
                                     <th>角色描述</th>
                                 </tr>
-                                @foreach($allRoles as $role)
+                                @foreach($roles as $role)
                                     <tr>
-                                        @if(in_array($role['id'], $checkedRoleIds, true))
+                                        @if($role['checked'])
                                             <td><input type="checkbox" class="checkbox role-id"
                                                        data-id="{{$role['id']}}" checked="checked"></td>
                                         @else
@@ -50,8 +50,9 @@
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消</button>
-                            <button type="submit" class="btn btn-info pull-right" id="menu-setting-btn"
-                                    data-url="{{action('Admin\RouteController@postSetting', ['routes' => $routeId])}}">
+                            <button type="submit" class="btn btn-info pull-right" id="set-ids-btn"
+                                    data-name="role_ids"
+                                    data-url="{{action('Admin\RouteController@postRoles', [$route->id])}}">
                                 提交
                             </button>
                         </div>

@@ -73,8 +73,9 @@
                                                     <td>{{$route['group']}}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a href="{{url('admin/routes', [$route['id']])}}" title="设置"
-                                                               role="button" class="btn btn-default btn-flat">
+                                                            <a href="{{action('Admin\RouteController@getRoles', [$route['id']])}}"
+                                                               title="设置" role="button"
+                                                               class="btn btn-default btn-flat">
                                                                 <i class="fa fa-gear"></i>
                                                             </a>
                                                             <a title="编辑" role="button"

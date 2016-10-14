@@ -63,7 +63,8 @@
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-default" onclick="history.go(-1);">取消
                                         </button>
-                                        <button type="submit" class="btn btn-info pull-right" id="role-set-routes-btn"
+                                        <button type="submit" class="btn btn-info pull-right" id="set-ids-btn"
+                                                data-name="route_ids"
                                                 data-url="{{action('Admin\RoleController@postRoutes', ['roles' => $role->id])}}">
                                             提交
                                         </button>

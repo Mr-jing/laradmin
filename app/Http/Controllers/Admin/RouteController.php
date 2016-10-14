@@ -49,25 +49,27 @@ class RouteController extends Controller
                 ->withInput()
                 ->withErrors(array('保存失败，请刷新页面后重试'));
         }
-        return redirect()->action('Admin\RouteController@show', ['id' => $route->id]);
+        return redirect()->action('Admin\RouteController@getRoles', [$route->id]);
     }
 
-    public function show($id)
+    public function getRoles($id)
     {
         $route = Route::findOrFail($id);
 
         $allRoles = Role::all()->toArray();
 
         $checkedRoleIds = $route->roles()->get()->modelKeys();
+        foreach ($allRoles as &$role) {
+            $role['checked'] = in_array($role['id'], $checkedRoleIds, true);
+        }
 
-        return view('admin.route.show', [
-            'allRoles' => $allRoles,
-            'checkedRoleIds' => $checkedRoleIds,
-            'routeId' => $id,
+        return view('admin.route.roles', [
+            'route' => $route,
+            'roles' => $allRoles,
         ]);
     }
 
-    public function postSetting(SetRoleIdsRequest $request, $id)
+    public function postRoles(SetRoleIdsRequest $request, $id)
     {
         $route = Route::findOrFail($id);
 
