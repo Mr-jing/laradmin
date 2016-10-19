@@ -6,7 +6,7 @@ use App\Http\Requests\SetMenuIdsRequest;
 use App\Http\Requests\SetRouteIdsRequest;
 use App\Models\Menu;
 use App\Models\Role;
-use App\Http\Requests\CreateRoleRequest;
+use App\Http\Requests\StoreRoleRequest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Route;
@@ -26,7 +26,7 @@ class RoleController extends Controller
         return view('admin.role.create');
     }
 
-    public function store(CreateRoleRequest $request)
+    public function store(StoreRoleRequest $request)
     {
         $role = new Role();
         $role->name = trim($request->role_name);
@@ -41,11 +41,6 @@ class RoleController extends Controller
         return redirect()->route('admin.roles.index');
     }
 
-    public function show($id)
-    {
-        $role = Role::findOrFail($id);
-    }
-
     public function edit($id)
     {
         $role = Role::findOrFail($id);
@@ -54,7 +49,7 @@ class RoleController extends Controller
         ]);
     }
 
-    public function update(CreateRoleRequest $request, $id)
+    public function update(StoreRoleRequest $request, $id)
     {
         $role = Role::findOrFail($id);
         $role->name = trim($request->role_name);
@@ -71,14 +66,15 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
-        $count = $role->users()->count();
-        if ($count > 0) {
+
+        if ($role->users()->count() > 0) {
             return response()->json([
                 'status' => false,
                 'msg' => '该角色已被赋予用户，无法删除',
                 'data' => array()
             ]);
         }
+
         if ($role->delete()) {
             // TODO 删除 role_user、role_menu、role_route、permission_role 的记录
             return response()->json([
@@ -87,6 +83,7 @@ class RoleController extends Controller
                 'data' => array()
             ]);
         }
+
         return response()->json([
             'status' => false,
             'msg' => '删除失败，请刷新后重试',

@@ -27,8 +27,8 @@
                             @endforeach
                         </div>
 
-                        <form class="form-horizontal"
-                              action="{{action('Admin\RoleController@update', ['id' => $role->id])}}" method="post">
+                        <form class="form-horizontal" method="post"
+                              action="{{action('Admin\RoleController@update', [$role->id])}}">
 
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
@@ -38,14 +38,14 @@
                                     <label for="name" class="col-sm-2 control-label">唯一名称</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="name" name="role_name"
-                                               placeholder="唯一名称" value="{{$role->name}}">
+                                               placeholder="唯一名称" value="{{old('role_name', $role->name)}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="col-sm-2 control-label">描述</label>
                                     <div class="col-sm-10">
                                         <textarea id="description" name="role_description" class="form-control" rows="3"
-                                                  placeholder="描述">{{$role->description}}</textarea>
+                                                  placeholder="描述">{{old('role_description', $role->description)}}</textarea>
                                     </div>
                                 </div>
                             </div>
