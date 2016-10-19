@@ -3,11 +3,11 @@
 @section('content')
     <div class="content-wrapper" style="min-height: 916px;">
         <section class="content-header">
-            <h1>编辑菜单</h1>
+            <h1>编辑权限</h1>
             <ol class="breadcrumb">
-                <li><a href="{{url('admin')}}"><i class="fa fa-dashboard"></i>首页</a></li>
-                <li><a href="{{url('admin/menus')}}">菜单列表</a></li>
-                <li class="active">编辑菜单</li>
+                <li><a href="{{url('/admin')}}"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li><a href="{{url('/admin/routes')}}">权限列表</a></li>
+                <li class="active">编辑权限</li>
             </ol>
         </section>
 
@@ -16,8 +16,7 @@
                 <div class="col-xs-12">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">编辑菜单</h3>
-
+                            <h3 class="box-title">编辑权限</h3>
                             @foreach ($errors->all() as $error)
                                 <div class="alert alert-danger alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -29,43 +28,47 @@
                         </div>
 
                         <form class="form-horizontal" method="post"
-                              action="{{action('Admin\MenuController@update', [$menu->id])}}">
+                              action="{{action('Admin\RouteController@update',[$route->id])}}">
 
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
 
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="parent_id" class="col-sm-2 control-label">父级菜单</label>
+                                    <label for="group" class="col-sm-2 control-label">分组名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="group" name="route_group"
+                                               value="{{old('route_group', $route->group)}}"
+                                               placeholder="输入分组名称，例如：用户管理">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">权限名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" name="route_name"
+                                               value="{{old('route_name', $route->name)}}"
+                                               placeholder="输入权限名称，例如：用户列表页面">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="method" class="col-sm-2 control-label">method</label>
                                     <div class="col-sm-10">
                                         {!! \Form::select(
-                                        'menu_parent_id',
-                                        $menuOptions,
-                                        old('menu_parent_id', $menu->parent_id),
-                                        ['id' => 'parent_id', 'class' => 'form-control']) !!}
+                                        'route_method',
+                                        ['GET' => 'GET', 'POST'=>'POST','PUT'=>'PUT','DELETE' => 'DELETE'],
+                                        old('route_method', $route->method),
+                                        ['id' => 'method', 'class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name" class="col-sm-2 control-label">名称</label>
+                                    <label for="uri" class="col-sm-2 control-label">uri</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="name" name="menu_name"
-                                               placeholder="名称" value="{{old('menu_name', $menu->name)}}">
+                                        <input type="text" class="form-control" id="uri" name="route_uri"
+                                               value="{{old('route_uri', $route->uri)}}"
+                                               placeholder="输入权限uri，例如：admin/users">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="url" class="col-sm-2 control-label">url</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="url" name="menu_url"
-                                               placeholder="url" value="{{old('menu_url', $menu->url)}}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="sort" class="col-sm-2 control-label">排序数值</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="sort" name="menu_sort"
-                                               placeholder="排序数值" value="{{old('menu_sort', $menu->sort)}}">
-                                    </div>
-                                </div>
+
                             </div>
 
                             <div class="box-footer">
