@@ -84,6 +84,7 @@ class RouteController extends Controller
             $route->roles()->saveMany($newRoles);
 
         });
+
         return response()->json([
             'status' => true,
             'msg' => '设置成功',

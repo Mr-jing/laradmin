@@ -78,12 +78,15 @@
                                                                class="btn btn-default btn-flat">
                                                                 <i class="fa fa-gear"></i>
                                                             </a>
-                                                            <a title="编辑" role="button"
+                                                            <a href="{{action('Admin\RouteController@edit', [$route['id']])}}"
+                                                               title="编辑" role="button"
                                                                class="btn btn-default btn-flat">
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>
-                                                            <a title="删除" role="button"
-                                                               class="btn btn-default btn-flat">
+                                                            <a data-url="{{action('Admin\RouteController@destroy', [$route['id']])}}"
+                                                               data-method="DELETE" href="javascript:void(0);"
+                                                               title="删除" role="button"
+                                                               class="btn btn-default btn-flat delete_action">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div>
