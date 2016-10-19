@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 use App\Http\Requests\StoreRouteRequest;
 use App\Http\Requests\SetRoleIdsRequest;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use App\Models\Route;
 use App\Models\Role;
 

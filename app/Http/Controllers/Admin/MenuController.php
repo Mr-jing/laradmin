@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\SetRoleIdsRequest;
-use App\Http\Requests\StoreMenuRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\SetRoleIdsRequest;
 use App\Models\Menu;
 use App\Models\Role;
-use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
