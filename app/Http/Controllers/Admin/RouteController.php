@@ -131,14 +131,20 @@ class RouteController extends Controller
     public function destroy($id)
     {
         $route = Route::findOrFail($id);
-        // 删除权限和角色的关联数据
-        $route->roles()->detach();
-        // 删除权限
-        $route->delete();
-        return response()->json([
-            'status' => true,
-            'msg' => '删除成功',
-            'data' => array()
-        ]);
+
+        if ($route->delete()) {
+            return response()->json([
+                'status' => true,
+                'msg' => '删除成功',
+                'data' => array()
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'msg' => '删除失败，请刷新页面后重新尝试',
+                'data' => array()
+            ]);
+        }
+
     }
 }
