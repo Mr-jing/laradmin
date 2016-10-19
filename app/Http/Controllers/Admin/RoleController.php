@@ -76,7 +76,6 @@ class RoleController extends Controller
         }
 
         if ($role->delete()) {
-            // TODO 删除 role_user、role_menu、role_route、permission_role 的记录
             return response()->json([
                 'status' => true,
                 'msg' => '删除成功',
@@ -120,6 +119,7 @@ class RoleController extends Controller
             // 重新添加
             $role->routes()->saveMany($newRoutes);
         });
+
         return response()->json([
             'status' => true,
             'msg' => '设置成功',
@@ -160,6 +160,7 @@ class RoleController extends Controller
             // 重新添加
             $role->menus()->saveMany($newMenus);
         });
+
         return response()->json([
             'status' => true,
             'msg' => '设置成功',
