@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateRouteRequest extends Request
+class StoreRouteRequest extends Request
 {
     public function authorize()
     {

@@ -1,12 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CreateRouteRequest;
+use App\Http\Requests\StoreRouteRequest;
 use App\Http\Requests\SetRoleIdsRequest;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Route;
 use App\Models\Role;
@@ -26,7 +24,7 @@ class RouteController extends Controller
         return view('admin.route.create');
     }
 
-    public function store(CreateRouteRequest $request)
+    public function store(StoreRouteRequest $request)
     {
         $route = new Route();
         $route->name = trim($request->route_name);
@@ -102,30 +100,31 @@ class RouteController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreRouteRequest $request, $id)
     {
         $route = Route::findOrFail($id);
-        $validator = Validator::make($request->all(), [
-            'route_display_name' => 'required|max:255',
-            'route_method' => 'required|max:20|in:GET,POST,PUT,DELETE',
-            'route_uri' => 'required|max:255',
-        ]);
-        if ($validator->fails()) {
+
+        $route->name = trim($request->route_name);
+        $route->method = $request->route_method;
+        $route->uri = trim($request->route_uri);
+        $route->group = $request->has('route_group') ? trim($request->route_group) : '';
+
+        try {
+            $status = $route->save();
+        } catch (QueryException $e) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->withErrors($validator->errors());
+                ->withErrors(array('该权限已存在，请勿重复添加'));
         }
-        $route->display_name = trim($request->route_display_name);
-        $route->method = $request->route_method;
-        $route->uri = trim($request->route_uri);
-        $re = $route->save();
-        if (!$re) {
+
+        if (!$status) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->withErrors(array('保存失败，请刷新页面后重试'));
         }
+
         return redirect()->route('admin.routes.index');
     }
 
