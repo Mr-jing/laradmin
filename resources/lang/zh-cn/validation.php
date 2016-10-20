@@ -89,23 +89,22 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'role_id' => [
+            'required' => '角色是必填的',
+        ],
+        'password' => [
+            'required' => '密码是必填的',
+            'between' => '密码长度必须在:min~:max之间',
+            'confirmed' => '两次密码必须一致',
+        ],
+        'email' => [
+            'required' => '邮箱是必填的',
+            'unique' => '邮箱已存在',
+            'email' => '邮箱格式有误',
+            'max' => '邮箱长度不能超过:max',
         ],
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Attributes
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used to swap attribute place-holders
-    | with something more reader friendly such as E-Mail Address instead
-    | of "email". This simply helps us make messages a little cleaner.
-    |
-    */
-
-    'attributes' => [],
 
     'menu_parent_id' => [
         'required' => '父级菜单是必填的.',
@@ -122,5 +121,29 @@ return [
     'route_ids' => [
         'array' => '权限编号格式有误.',
     ],
+
+
+    'fields' => [
+        'user' => [
+            'name' => [
+                'required' => '用户名是必填的',
+                'unique' => '用户名已存在',
+                'max' => '用户名长度不能超过:max',
+            ],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Attributes
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used to swap attribute place-holders
+    | with something more reader friendly such as E-Mail Address instead
+    | of "email". This simply helps us make messages a little cleaner.
+    |
+    */
+
+    'attributes' => [],
 
 ];
