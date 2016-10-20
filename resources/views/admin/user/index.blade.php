@@ -6,12 +6,11 @@
 
 @section('content')
     <div class="content-wrapper" style="min-height: 916px;">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>菜单列表</h1>
+            <h1>用户列表</h1>
             <ol class="breadcrumb">
                 <li><a href="{{url('admin')}}"><i class="fa fa-dashboard"></i>首页</a></li>
-                <li class="active">菜单列表</li>
+                <li class="active">用户列表</li>
             </ol>
         </section>
 
@@ -23,8 +22,8 @@
                         <div class="box-header">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <a href="{{url('admin/menus/create')}}" class="btn btn-block btn-success"
-                                       role="button"><i class="fa fa-plus-circle"></i>添加菜单</a>
+                                    <a href="{{url('admin/users/create')}}" class="btn btn-block btn-success"
+                                       role="button"><i class="fa fa-plus-circle"></i>添加用户</a>
                                 </div>
                                 <div class="col-sm-10"></div>
                             </div>
@@ -41,22 +40,26 @@
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 163px;">名称
+                                                    style="width: 163px;">用户ID
+                                                </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                                    aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 163px;">用户名
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending"
-                                                    style="width: 203px;">URL
+                                                    style="width: 203px;">邮箱
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                    colspan="1" aria-label="Browser: activate to sort column ascending"
+                                                    style="width: 203px;">角色
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Platform(s): activate to sort column ascending"
-                                                    style="width: 179px;">排序
+                                                    style="width: 179px;">注册时间
                                                 </th>
-                                                {{--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"--}}
-                                                {{--colspan="1"--}}
-                                                {{--aria-label="Engine version: activate to sort column ascending"--}}
-                                                {{--style="width: 139px;">状态--}}
-                                                {{--</th>--}}
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending"
@@ -66,25 +69,21 @@
                                             </thead>
                                             <tbody>
 
-                                            @foreach($menus as $key => $menu)
+                                            @foreach($users as $user)
                                                 <tr role="row" class="odd">
-                                                    <td>{{$menu['prefix']}}{{$menu['name']}}</td>
-                                                    <td>{{$menu['url']}}</td>
-                                                    <td>{{$menu['sort']}}</td>
-                                                    {{--<td>{{$menu['status']}}</td>--}}
+                                                    <td>{{$user['id']}}</td>
+                                                    <td>{{$user['name']}}</td>
+                                                    <td>{{$user['email']}}</td>
+                                                    <td>{{$user['role']}}</td>
+                                                    <td>{{$user['created_at']}}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a href="{{action('Admin\MenuController@getRoles', [$menu['id']])}}"
-                                                               title="设置" role="button"
-                                                               class="btn btn-default btn-flat">
-                                                                <i class="fa fa-gear"></i>
-                                                            </a>
-                                                            <a href="{{action('Admin\MenuController@edit', [$menu['id']])}}"
+                                                            <a href="{{action('Admin\UserController@edit', [$user['id']])}}"
                                                                title="编辑" role="button"
                                                                class="btn btn-default btn-flat">
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>
-                                                            <a data-url="{{action('Admin\MenuController@destroy', [$menu['id']])}}"
+                                                            <a data-url="{{action('Admin\UserController@destroy', [$user['id']])}}"
                                                                data-method="DELETE" href="javascript:void(0);"
                                                                title="删除" role="button"
                                                                class="btn btn-default btn-flat delete_action">
