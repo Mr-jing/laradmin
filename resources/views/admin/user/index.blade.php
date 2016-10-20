@@ -37,15 +37,13 @@
                                                role="grid" aria-describedby="example1_info">
                                             <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                <th class="sorting_desc" tabindex="0" aria-controls="example1"
                                                     rowspan="1" colspan="1" aria-sort="ascending"
                                                     aria-label="Rendering engine: activate to sort column descending"
                                                     style="width: 163px;">用户ID
                                                 </th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example1"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    aria-label="Rendering engine: activate to sort column descending"
-                                                    style="width: 163px;">用户名
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                    colspan="1" style="width: 163px;">用户名
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending"
@@ -95,6 +93,19 @@
                                             @endforeach
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="dataTables_info" id="example1_info" role="status"
+                                             aria-live="polite">{{$users->total()}} 条记录，总 {{$users->lastPage()}} 页
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                            {!! $users->render() !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
