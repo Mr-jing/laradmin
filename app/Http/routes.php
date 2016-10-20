@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('admin');
 });
 
 Route::get('auth/register', 'Auth\AuthController@getRegister');
