@@ -36,14 +36,14 @@
                                     <label for="name" class="col-sm-2 control-label">用户名</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="name" name="name"
-                                               placeholder="用户名">
+                                               placeholder="用户名" value="{{old('name')}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="col-sm-2 control-label">邮箱</label>
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control" id="email" name="email"
-                                               placeholder="邮箱">
+                                               placeholder="邮箱" value="{{old('email')}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -58,6 +58,15 @@
                                     <div class="col-sm-10">
                                         <input type="password" class="form-control" id="password_confirmation"
                                                name="password_confirmation" placeholder="重复密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="role_id" class="col-sm-2 control-label">角色</label>
+                                    <div class="col-sm-10">
+                                        {!! \Form::select('role_id', $roleOptions, null, [
+                                            'id' => 'role_id',
+                                            'class' => 'form-control',
+                                        ]) !!}
                                     </div>
                                 </div>
                             </div>

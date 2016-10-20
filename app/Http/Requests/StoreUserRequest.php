@@ -26,7 +26,8 @@ class StoreUserRequest extends Request
     {
         return [
             'name.required' => trans('validation.fields.user.name.required'),
-            'name.max' => trans('validation.user.name.max'),
+            'name.max' => trans('validation.fields.user.name.max'),
+            'name.unique' => trans('validation.fields.user.name.unique'),
         ];
     }
 }
