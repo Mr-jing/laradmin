@@ -81,12 +81,12 @@
                                                                class="btn btn-default btn-flat">
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>
-                                                            <a data-url="{{action('Admin\UserController@destroy', [$user->id])}}"
-                                                               data-method="DELETE" href="javascript:void(0);"
-                                                               title="删除" role="button"
-                                                               class="btn btn-default btn-flat delete_action">
-                                                                <i class="fa fa-trash"></i>
-                                                            </a>
+                                                            {{--<a data-url="{{action('Admin\UserController@destroy', [$user->id])}}"--}}
+                                                               {{--data-method="DELETE" href="javascript:void(0);"--}}
+                                                               {{--title="删除" role="button"--}}
+                                                               {{--class="btn btn-default btn-flat delete_action">--}}
+                                                                {{--<i class="fa fa-trash"></i>--}}
+                                                            {{--</a>--}}
                                                         </div>
                                                     </td>
                                                 </tr>
