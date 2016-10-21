@@ -31,6 +31,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'role
     Route::post('/roles/{roles}/menus', ['uses' => 'RoleController@postMenus']);
 
     // 用户管理
-    Route::resource('users', 'UserController', ['except' => ['show']]);
+    Route::resource('users', 'UserController', ['except' => ['show', 'destroy']]);
 
 });

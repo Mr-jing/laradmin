@@ -47,11 +47,6 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $user = User::findOrFail($id);
@@ -87,8 +82,4 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-    public function destroy($id)
-    {
-        //
-    }
 }
