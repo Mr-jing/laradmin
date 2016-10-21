@@ -28,7 +28,7 @@
                         </div>
 
                         <form class="form-horizontal" method="post"
-                              action="{{action('Admin\UserController', [$user->id])}}">
+                              action="{{action('Admin\UserController@update', [$user->id])}}">
 
                             {!! method_field('PUT') !!}
                             {!! csrf_field() !!}
@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <label for="role_id" class="col-sm-2 control-label">角色</label>
                                     <div class="col-sm-10">
-                                        {!! \Form::select('role_id', $roleOptions, $user->role_id, [
+                                        {!! \Form::select('role_id', $roleOptions, $user->roles[0]->id, [
                                             'id' => 'role_id',
                                             'class' => 'form-control',
                                         ]) !!}

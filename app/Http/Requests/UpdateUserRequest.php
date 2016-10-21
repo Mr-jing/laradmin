@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class StoreUserRequest extends Request
+class UpdateUserRequest extends Request
 {
     public function authorize()
     {
@@ -17,7 +17,7 @@ class StoreUserRequest extends Request
         return [
             'name' => 'required|max:20|unique:users,name,' . $id,
             'email' => 'required|max:255|email|unique:users,email,' . $id,
-            'password' => 'required|between:6,30|confirmed',
+            'password' => 'between:6,30|confirmed',
             'role_id' => 'required|integer'
         ];
     }

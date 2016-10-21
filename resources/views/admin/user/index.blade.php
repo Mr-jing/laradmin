@@ -69,19 +69,19 @@
 
                                             @foreach($users as $user)
                                                 <tr role="row" class="odd">
-                                                    <td>{{$user['id']}}</td>
-                                                    <td>{{$user['name']}}</td>
-                                                    <td>{{$user['email']}}</td>
-                                                    <td>{{$user['role']}}</td>
-                                                    <td>{{$user['created_at']}}</td>
+                                                    <td>{{$user->id}}</td>
+                                                    <td>{{$user->name}}</td>
+                                                    <td>{{$user->email}}</td>
+                                                    <td>{{$user->roles[0]->name}}</td>
+                                                    <td>{{$user->created_at}}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <a href="{{action('Admin\UserController@edit', [$user['id']])}}"
+                                                            <a href="{{action('Admin\UserController@edit', [$user->id])}}"
                                                                title="编辑" role="button"
                                                                class="btn btn-default btn-flat">
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>
-                                                            <a data-url="{{action('Admin\UserController@destroy', [$user['id']])}}"
+                                                            <a data-url="{{action('Admin\UserController@destroy', [$user->id])}}"
                                                                data-method="DELETE" href="javascript:void(0);"
                                                                title="删除" role="button"
                                                                class="btn btn-default btn-flat delete_action">
