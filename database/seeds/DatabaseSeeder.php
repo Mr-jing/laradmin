@@ -17,5 +17,12 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserTableSeeder::class);
 
         Model::reguard();
+        $this->call('UsersTableSeeder');
+        $this->call('RolesTableSeeder');
+        $this->call('MenusTableSeeder');
+        $this->call('RoutesTableSeeder');
+        $this->call('RoleUserTableSeeder');
+        $this->call('RoleMenuTableSeeder');
+        $this->call('RoleRouteTableSeeder');
     }
 }
