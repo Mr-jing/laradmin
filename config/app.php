@@ -141,6 +141,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
         /*
          * Application Service Providers...
          */
